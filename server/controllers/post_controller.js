@@ -30,10 +30,10 @@ const getPosts = async (req, res) => {
 
     const postsWithDetail = await getPostsWithDetail(posts);
     const result = (postCount > (paging + 1) * pageSize) ? {
-        data: postsWithDetail,
+        posts: postsWithDetail,
         next_paging: paging + 1
     } : {
-        data: postsWithDetail,
+        posts: postsWithDetail,
     };
 
     res.status(200).json(result);
@@ -44,10 +44,10 @@ const getPostsWithDetail = async (posts) => {
     const userIds = posts.map(post => post.user_id);
     const imagePath = `${HOSTNAME}images/upload/`;
     const card = await Card.getPostThumbnail(postIds);
-    const user = await User.getUserInfo(userIds);
 
     for (let i = 0; i < postIds.length; i++) {
-        posts[i].user_name = user[i].name;
+        const [user] = await User.getUserInfo(userIds[i]);
+        posts[i].user_name = user.name;
         posts[i].thumbnail = imagePath + card[i].image;
     }
     return posts;
