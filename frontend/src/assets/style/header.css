@@ -1,0 +1,129 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC&family=Poppins:wght@200;300;400;500&display=swap');
+
+* {
+    padding: 0px;
+    margin: 0px;
+}
+
+body {
+    width: 100%;
+    padding-top: 90px;
+}
+
+.img {
+    background-repeat: no-repeat;
+    background-size: contain;
+    vertical-align: middle;
+}
+
+header,
+.search,
+.header-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+header {
+    background-color: #CBE3F4;
+    width: 100%;
+    height: 90px;
+    box-sizing: border-box;
+    position: fixed;
+    top: 0;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-weight: 400;
+    z-index: 1;
+}
+
+.logo {
+    background-image: url(../images/logo.png);
+    width: 120px;
+    height: 56px;
+    margin-right: 60px;
+}
+
+.header-link .img,
+.search .img {
+    width: 30px;
+    height: 30px;
+}
+
+.search {
+    width: 600px;
+    overflow: hidden;
+    position: relative;
+}
+
+.search input[type="search"] {
+    font-size: 16px;
+    width: 600px;
+    line-height: 44px;
+    padding: 0 20px;
+    border: none;
+    border-radius: 20px;
+}
+
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
+    -webkit-appearance: none;
+}
+
+input[type="search"]:hover,
+input[type="search"]:focus,
+input[type="search"]:active {
+    outline: none;
+}
+
+.search-btn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    right: -12px;
+    width: 70px;
+    height: 44px;
+    opacity: 0;
+    background-color: #e6f4ff;
+    border-radius: 0 20px 20px 0;
+    border: 1.6px solid #FFFFFF;
+    box-sizing: border-box;
+    transition: all .3s ease;
+}
+
+.icon-search {
+    background-image: url(../images/search.png);
+    border: none;
+    background-color: #e6f4ff;
+}
+
+.search:hover .search-btn,
+.search:focus .search-btn,
+.search:active .search-btn{
+    right: 0px;
+    opacity: 1;
+} 
+
+.header-link{
+    margin-left: 60px;
+}
+
+.header-link button {
+    border: none;
+    background-color: transparent;
+    margin-left: 28px;
+}
+
+.header-link-edit {
+    background-image: url(../images/edit.png);
+}
+
+.header-link-location {
+    background-image: url(../images/location.png);
+}
+
+.header-link-profile {
+    background-image: url(../images/profile.png);
+}
