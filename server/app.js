@@ -6,9 +6,12 @@ const { API_VERSION } = process.env;
 
 app.use(cors());
 app.use(express.static('public'));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.use('/api/' + API_VERSION, [
     require('./routes/post_route'),
+    require('./routes/user_route'),
 ]);
 
 // Error handling

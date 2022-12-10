@@ -5,6 +5,6 @@ const {
     getPosts,
 } = require('../controllers/post_controller');
 
-router.get('/posts/:category',wrapAsync(getPosts));
+router.route('/posts/:category').get(wrapAsync(getPosts));
 
 module.exports = router;
