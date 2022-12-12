@@ -14,18 +14,17 @@ const Posts = () => {
 
             const keyword = new URLSearchParams(window.location.search).get('keyword');
 
-            function fetchProducts() {
+            function fetchPosts() {
                 if (keyword) {
                     return apiPost.get(`/search?keyword=${keyword}&paging=${nextPagingRef.current}`);
                 }
                 return apiPost.get(`/all?paging=${nextPagingRef.current}`);
             }
 
-            fetchProducts().then((json) => {
+            fetchPosts().then((json) => {
                 if (nextPagingRef.current !== json.data.next_paging)
                     setPosts((prev) => [...prev, ...json.data.posts])
                 nextPagingRef.current = json.data.next_paging;
-                console.log('11111', json.data.posts);
             });
         }, { rootMargin: "200px 0px" });
         intersectionObserver.observe(document.querySelector('.waypoint'));
