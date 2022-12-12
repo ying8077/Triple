@@ -7,6 +7,14 @@ const getPostThumbnail = async (postIds) => {
     return result;
 };
 
+const getCards = async (postId) => {
+    const queryStr = 'SELECT `location_id`, `description`, `recommend`, `image` FROM `card` WHERE `post_id` IN(?)';
+    const bindings = [postId];
+    const [result] = await pool.query(queryStr, bindings);
+    return result;
+}
+
 module.exports = {
     getPostThumbnail,
+    getCards,
 }

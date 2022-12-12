@@ -28,6 +28,21 @@ const getPosts = async (pageSize, paging = 0, requirement = {}) => {
     };
 };
 
+const getPost = async (postId) => {
+    const queryStr = 'SELECT * FROM `post` WHERE `id` IN(?)';
+    const bindings = [postId];
+    const [result] = await pool.query(queryStr, bindings);
+    return result;
+}
+
+const updateLikes = async (postId, like) => {
+    const queryStr = 'UPDATE `post` SET `likes` = `likes` + ? WHERE `id` = ?';
+    const bindings = [like, postId];
+    const [result] = await pool.query(queryStr, bindings);
+}
+
 module.exports = {
     getPosts,
+    getPost,
+    updateLikes,
 };

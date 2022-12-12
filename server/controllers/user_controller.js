@@ -53,7 +53,7 @@ const nativeSignIn = async (req, res) => {
         email: result.email
     };
     const token = jwt.sign(payload, TOKEN_SECRET);
-    res.send({ status: "success", message: "登入成功", token });
+    res.send({ status: "success", message: "登入成功", token, user_id: result.id });
 };
 
 module.exports = {

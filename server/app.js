@@ -12,6 +12,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/api/' + API_VERSION, [
     require('./routes/post_route'),
     require('./routes/user_route'),
+    require('./routes/collection_route'),
 ]);
 
 // Error handling
