@@ -15,24 +15,28 @@ const Header = () => {
         }
     }
 
-    function navigateMember() {
-        if (localStorage.getItem('user') !== null) {
-            navigate('/profile');
-        } else {
+    function handleSearch(){
+        window.location.replace(`/?keyword=${keyword}`);
+    }
+
+    function navigateProfile() {
+        // if (localStorage.getItem('user') !== null) {
+        //     navigate('/profile');
+        // } else {
             navigate('/signIn');
-        }
+        // }
     }
 
     return <header>
         <a href="/" className="logo img"> </a>
         <div className="search">
-            <input type="search" onChange={keywordChange} onKeyDown={(e) => handleKeyDown(e)} placeholder="搜尋貼文..."/>
-            <div className="search-btn"><button className="icon-search img"></button></div>
+            <input type="search" onChange={keywordChange} onKeyDown={handleKeyDown} placeholder="搜尋貼文..."/>
+            <div className="search-btn"><button className="icon-search img" onClick={handleSearch}></button></div>
         </div>
         <div className="header-link">
             <button className="header-link-edit img"></button>
-            <button className="header-link-location img" onClick={navigateMember}></button>
-            <button className="header-link-profile img"></button>
+            <button className="header-link-location img"></button>
+            <button className="header-link-profile img" onClick={navigateProfile}></button>
         </div>
     </header>
 }
