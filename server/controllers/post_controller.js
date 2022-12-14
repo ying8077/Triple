@@ -63,6 +63,7 @@ const getPost = async(req, res) => {
     const locations = await Location.getLocation(locationIds);
 
     cards.map(card => {
+        card.image = imagePath + card.image;
         locations.map(location => {
             if(card.location_id === location.id){
                 card.location_name = location.name;

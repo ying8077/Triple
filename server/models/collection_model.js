@@ -4,9 +4,13 @@ const createCollection = async (collection) => {
     const [result] = await pool.query('INSERT INTO `collection` SET ?', collection);
 }
 
+const getCollection = async (user_id) => {
+    const [result] = await pool.query('SELECT `id`, `name` FROM `collection` WHERE `user_id` = ?', user_id);
+    return result
+}
+
 const updateCollection = async (collection_id, details) => {
     const [oldColletion] = await pool.query('SELECT `details` FROM `collection` WHERE id = ?', collection_id);
-    console.log(oldColletion[0]);
     const oldDetails = oldColletion[0].details;
     const index = oldDetails.indexOf(']');
     const newDetails = oldDetails.slice(0, index) + `,${details.substring(9)}`;
@@ -18,5 +22,6 @@ const updateCollection = async (collection_id, details) => {
 
 module.exports = {
     createCollection,
+    getCollection,
     updateCollection,
 }

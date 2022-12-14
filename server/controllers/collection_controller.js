@@ -1,9 +1,15 @@
 const validator = require('validator');
 const Collection = require('../models/collection_model');
 
+const getCollection = async (req, res) => {
+    const user_id = req.query.user;
+    const list = await Collection.getCollection(user_id);
+
+    res.status(200).json(list);
+}
 const updateCollection = async (req, res) => {
     const data = req.body;
-    const details = validator.blacklist(JSON.stringify({"list":[{"id":1,"qty":1}]}), '<>');
+    const details = validator.blacklist(JSON.stringify(data.details), '<>');
     
     if (data.collection_name) {
         const newCollection = {
@@ -20,5 +26,6 @@ const updateCollection = async (req, res) => {
 }
 
 module.exports = {
+    getCollection,
     updateCollection,
 }
