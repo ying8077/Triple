@@ -30,7 +30,7 @@ const Header = () => {
     return <header>
         <a href="/" className="logo img"> </a>
         <div className="search">
-            <input type="search" onChange={keywordChange} onKeyDown={(e) => handleKeyDown(e)} placeholder="搜尋貼文..."/>
+            <input type="search" onChange={keywordChange} onKeyDown={handleKeyDown} placeholder="搜尋貼文..."/>
             <div className="search-btn"><button className="icon-search img" onClick={handleSearch}></button></div>
         </div>
         <div className="header-link">

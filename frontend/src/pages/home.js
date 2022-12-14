@@ -1,9 +1,42 @@
-import { useState, useEffect, useRef } from "react"
-import "../assets/style/index.css"
-import example from "../assets/images/user.jpg"
-import { apiPost } from "../util/api"
+import { useState, useEffect, useRef } from "react";
+import { useNavigate } from "react-router";
+import "../assets/style/index.css";
+import example from "../assets/images/user.jpg";
+import { apiPost } from "../util/api";
 
-const Posts = () => {
+const Post = ({ post }) => {
+    const navigate = useNavigate();
+    function handleClick(){
+        navigate(`/posts/detail?id=${post.id}`);
+    }
+
+    function getDescription(description) {
+        return description.length <= 40 ?
+            description.replace(/\r\n/g, "，") :
+            description.replace(/\r\n/g, "，").substring(0, 40) + '...';
+    }
+    return (
+        <div className="post" onClick={handleClick}>
+            <div className="post-user">
+                <img src={example} alt="userIcon" className="img"></img>
+                <label>{post.user_name}</label>
+            </div>
+            <div className="post-content">
+                <h3 className="post-content-title">{post.title}</h3>
+                <label>{getDescription(post.description)}</label>
+                <img src={post.thumbnail} alt="postImage"></img>
+            </div>
+            <div className="post-footer">
+                <div className="post-footer-like">
+                    <div className="like-icon img"></div>
+                    <label>{post.likes}</label>
+                </div>
+            </div>
+        </div>
+    )
+}
+
+const Home = () => {
     const [posts, setPosts] = useState([]);
     const nextPagingRef = useRef(0);
 
@@ -42,40 +75,6 @@ const Posts = () => {
             <div className="waypoint"></div>
         </>
     )
-}
-
-const Post = ({ post }) => {
-    function getDescription(description) {
-        return description.length <= 40 ?
-            description.replace(/\r\n/g, "，") :
-            description.replace(/\r\n/g, "，").substring(0, 40) + '...';
-    }
-    return (
-        <div className="post">
-            <div className="post-user">
-                <img src={example} alt="userIcon" className="img"></img>
-                <label>{post.user_name}</label>
-            </div>
-            <div className="post-content">
-                <h3 className="post-content-title">{post.title}</h3>
-                <label>{getDescription(post.description)}</label>
-                <img src={post.thumbnail} alt="postImage"></img>
-            </div>
-            <div className="post-footer">
-                <div className="post-footer-like">
-                    <div className="like-icon img"></div>
-                    <label>{post.likes}</label>
-                </div>
-            </div>
-        </div>
-    )
-}
-
-const Home = () => {
-
-    return <>
-        <Posts />
-    </>
 }
 
 export default Home
