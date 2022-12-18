@@ -23,9 +23,10 @@ const Header = () => {
         // if (localStorage.getItem('user') !== null) {
         //     navigate('/profile');
         // } else {
-            navigate('/signIn');
+            navigate('/sign-in');
         // }
     }
+    
 
     return <header>
         <a href="/" className="logo img"> </a>
@@ -34,7 +35,7 @@ const Header = () => {
             <div className="search-btn"><button className="icon-search img" onClick={handleSearch}></button></div>
         </div>
         <div className="header-link">
-            <button className="header-link-edit img"></button>
+            <button className="header-link-edit img" onClick={() => navigate('/new-post')}></button>
             <button className="header-link-location img"></button>
             <button className="header-link-profile img" onClick={navigateProfile}></button>
         </div>
