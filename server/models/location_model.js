@@ -7,6 +7,12 @@ const getLocation = async (locationId) => {
     return result;
 }
 
+const createLocation = async (location) => {
+    const [result] = await pool.query('INSERT INTO `location` SET ?', location);
+    return result.insertId;
+}
+
 module.exports = {
     getLocation,
+    createLocation,
 }

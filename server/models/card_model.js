@@ -14,7 +14,13 @@ const getCards = async (postId) => {
     return result;
 }
 
+const createCard = async (card) => {
+    const [result] = await pool.query('INSERT INTO `card` SET ?', card);
+    return result.insertId;
+}
+
 module.exports = {
     getPostThumbnail,
     getCards,
+    createCard,
 }

@@ -41,8 +41,14 @@ const updateLikes = async (postId, like) => {
     const [result] = await pool.query(queryStr, bindings);
 }
 
+const createPost = async (post) => {
+    const [result] = await pool.query('INSERT INTO `post` SET ?', post);
+    return result.insertId;
+}
+
 module.exports = {
     getPosts,
     getPost,
     updateLikes,
+    createPost,
 };
