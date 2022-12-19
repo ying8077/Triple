@@ -20,11 +20,11 @@ const Header = () => {
     }
 
     function navigateProfile() {
-        // if (localStorage.getItem('user') !== null) {
-        //     navigate('/profile');
-        // } else {
+        if (localStorage.getItem('user') !== null) {
+            navigate('/profile');
+        } else {
             navigate('/sign-in');
-        // }
+        }
     }
     
 
