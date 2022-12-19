@@ -5,7 +5,7 @@ const createCollection = async (collection) => {
 }
 
 const getCollection = async (user_id) => {
-    const [result] = await pool.query('SELECT `id`, `name` FROM `collection` WHERE `user_id` = ?', user_id);
+    const [result] = await pool.query('SELECT `id`, `name`, `details` FROM `collection` WHERE `user_id` = ?', user_id);
     return result
 }
 
