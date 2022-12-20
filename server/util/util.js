@@ -1,4 +1,6 @@
+const crypto = require('crypto');
 const jwt = require('jsonwebtoken');
+const multer = require('multer');
 const { TOKEN_SECRET } = process.env;
 
 const wrapAsync = (fn) => {
@@ -28,7 +30,35 @@ const authentication = () => {
     }
 };
 
+const upload = multer({
+    storage: multer.diskStorage({
+        destination: function (req, file, cb) {
+            cb(null, "./public/images/upload")
+        },
+        filename: function (req, file, cb) {
+            const customFileName = crypto.randomBytes(18).toString('hex').substr(0, 8);
+            const fileExtension = file.mimetype.split('/')[1]; // get file extension from original file name
+            cb(null, customFileName + '.' + fileExtension);
+        }
+    }),
+    limits: {
+        fileSize: 1000000
+    },
+    fileFilter(req, file, cb) {
+        if (!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
+            cb(new Error('Please upload an image'))
+        }
+        const fileSize = parseInt(req.headers['content-length']);
+        if (fileSize > 1000000) {
+            cb(new Error('file size > 1MB'));
+        }
+        cb(null, true)
+    }
+})
+
+
 module.exports = {
     wrapAsync,
-    authentication
+    authentication,
+    upload
 };

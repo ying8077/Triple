@@ -6,6 +6,8 @@ import "./assets/style/header.css"
 import Home from './pages/home';
 import SignIn from './pages/signIn'
 import PostDetail from './pages/postDetail';
+import NewPost from './pages/newPost';
+import Profile from './pages/profile';
 
 const App = () => {
     return (
@@ -14,8 +16,10 @@ const App = () => {
             <Header />
             <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="/signIn" element={<SignIn />} />
+                <Route path="/sign-in" element={<SignIn />} />
                 <Route path="/posts/detail" element={<PostDetail />} />
+                <Route path="/new-post" element={<NewPost />} />
+                <Route path="/profile" element={<Profile />} />
             </Routes>
         </BrowserRouter>
     )
