@@ -1,14 +1,21 @@
 import { useState, useEffect } from "react"
+import { useNavigate } from "react-router";
+import { toast } from "react-toastify";
 import "../assets/style/profile.css"
-import example from "../assets/images/user.jpg";
 import { apiCollection } from "../util/api"
-const user_id = JSON.parse(localStorage.getItem('user')).user_id;
 
 const Profile = () => {
     const [collections, setCollections] = useState();
+    const navigate = useNavigate();
 
     useEffect(() => {
-        apiCollection.get(`/?user=${user_id}`)
+        const user = JSON.parse(localStorage.getItem('user'));
+        if (!user) {
+            toast.error("請先登入!", { position: "top-center" });
+            return navigate('/sign-in');
+        }
+
+        apiCollection(user.token).get(`/?user=${user.user_id}`)
             .then(json => setCollections(json.data))
     }, [])
 
@@ -19,8 +26,14 @@ const Profile = () => {
                 <div className="collections">
                     {collections && collections.map(collection => {
                         return (
-                            <div key={collection.id} className="collection">
-                                <img src={collection.image} />
+                            <div
+                                key={collection.id}
+                                className="collection"
+                                onClick={() =>
+                                    navigate(`collection?id=${collection.id}`,
+                                        { state: { data: JSON.parse(collection.details).list } }
+                                    )}>
+                                <img src={collection.image} alt="collectionImg" />
                                 <label>{collection.name}</label>
                             </div>
                         )

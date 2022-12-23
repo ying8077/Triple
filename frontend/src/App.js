@@ -8,6 +8,7 @@ import SignIn from './pages/signIn'
 import PostDetail from './pages/postDetail';
 import NewPost from './pages/newPost';
 import Profile from './pages/profile';
+import Map from './pages/map'
 
 const App = () => {
     return (
@@ -20,6 +21,7 @@ const App = () => {
                 <Route path="/posts/detail" element={<PostDetail />} />
                 <Route path="/new-post" element={<NewPost />} />
                 <Route path="/profile" element={<Profile />} />
+                <Route path="profile/collection" element={<Map />} />
             </Routes>
         </BrowserRouter>
     )
