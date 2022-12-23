@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import { useNavigate } from "react-router";
 import { Rate } from 'antd';
 import { Modal } from 'react-bootstrap';
 import { toast } from "react-toastify";
@@ -7,12 +8,12 @@ import "../assets/style/postDetail.css";
 import example from "../assets/images/user.jpg";
 import { apiPost, apiCollection } from "../util/api";
 let cardSelected = [];
-const user_id = JSON.parse(localStorage.getItem('user')).user_id;
 
 const Card = ({ card }) => {
     function handleCheck(e) {
         const data = {
             id: card.location_id,
+            place_id: card.place_id,
             name: card.location_name,
             x: card.location_x,
             y: card.location_y
@@ -78,6 +79,7 @@ function CollectionModal(props) {
     }
 
     function handleClick(collection_id = 0, collection_name = "") {
+        const {user_id, token} = JSON.parse(localStorage.getItem('user'));
         let data;
         if (cardSelected.length === 0) {
             toast.warning("請先選擇收藏地點!", { position: "top-center" });
@@ -101,7 +103,7 @@ function CollectionModal(props) {
             })
         }
 
-        apiCollection.post("/update", data)
+        apiCollection(token).post("/update", data)
             .then(res => res.data)
             .then(data => {
                 if (data.status === "success") {
@@ -141,16 +143,24 @@ function CollectionModal(props) {
 }
 
 const PostDetail = () => {
+    const navigate = useNavigate();
     const [post, setPost] = useState();
     const [collections, setCollections] = useState();
     const [modalShow, setModalShow] = useState(false);
     const setupStatus = useRef(false);
 
     useEffect(() => {
+        const user = JSON.parse(localStorage.getItem('user'));
+        if (!user) {
+            toast.error("請先登入!", { position: "top-center" });
+            return navigate('/sign-in');
+        }
         const post_id = new URLSearchParams(window.location.search).get('id');
         apiPost.get(`/detail?id=${post_id}`)
             .then(json => { setPost(json.data); console.log(json.data) })
-        apiCollection.get(`/?user=${user_id}`)
+
+
+        apiCollection(user.token).get(`/?user=${user.user_id}`)
             .then(json => { setCollections(json.data) })
     }, []);
 

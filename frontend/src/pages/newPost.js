@@ -4,7 +4,6 @@ import { toast } from "react-toastify";
 import { Rate } from 'antd';
 import { apiPostImg, apiPost } from "../util/api";
 import "../assets/style/post.css";
-const user_id = JSON.parse(localStorage.getItem('user')).user_id;
 
 function handleTextAreaChange(event, textAreaHeight, setHeight) {
     const height = event.target.scrollHeight;
@@ -26,7 +25,6 @@ const Img = ({ values, setValues }) => {
 
     function fileUpdate(e) {
         const file = e.target.files[0];
-        const img = document.getElementById("fileUpdated")
         if (file) {
             setFile(window.URL.createObjectURL(file));
             const formData = new FormData();
@@ -43,7 +41,7 @@ const Img = ({ values, setValues }) => {
     if (file !== 0) {
         return (
             <div className="newPost-card-img">
-                <img src={file} id="fileUpdated" />
+                <img src={file} id="fileUpdated" alt="imgUploaded"/>
                 <button onClick={handleDelete}></button>
             </div>
         )
@@ -60,6 +58,7 @@ const Img = ({ values, setValues }) => {
 }
 
 const NewCard = (props) => {
+    const navigate = useNavigate();
     const [textareaheight, setTextareaheight] = useState(1);
     const [nameData, setName] = useState('');
     const [values, setValues] = useState({
@@ -72,7 +71,7 @@ const NewCard = (props) => {
     const autoCompleteRef = useRef();
     const inputRef = useRef();
     const options = {
-        fields: ["geometry", "name"],
+        fields: ["place_id","geometry", "name"],
         types: ["establishment"]
     };
 
@@ -89,6 +88,12 @@ const NewCard = (props) => {
     }
 
     useEffect(() => {
+        const user = JSON.parse(localStorage.getItem('user'));
+        if (!user) {
+            toast.error("請先登入!", { position: "top-center" });
+            navigate('/sign-in');
+        }
+
         autoCompleteRef.current = new window.google.maps.places.Autocomplete(
             inputRef.current,
             options
@@ -97,8 +102,10 @@ const NewCard = (props) => {
             const place = autoCompleteRef.current.getPlace();
             const geometry = place.geometry.location.toJSON();
             const name = place.name;
+            console.log(place)
 
             const location_data = {
+                "place_id": place.place_id,
                 "name": name,
                 "latitude": geometry.lat,
                 "longitude": geometry.lng
@@ -157,6 +164,7 @@ const NewPost = () => {
     };
 
     const onSubmit = () => {
+        const user_id = JSON.parse(localStorage.getItem('user')).user_id;
         let cards_data = []
         for (let i = 0; i < list.length; i++) {
             cards_data.push(mapOfValues[i]['value']);

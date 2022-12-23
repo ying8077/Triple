@@ -66,6 +66,7 @@ const getPost = async (req, res) => {
         card.image = imagePath + card.image;
         locations.map(location => {
             if (card.location_id === location.id) {
+                card.place_id = location.place_id;
                 card.location_name = location.name;
                 card.location_x = location.latitude;
                 card.location_y = location.longitude;
@@ -103,6 +104,7 @@ const createPost = async (req, res) => {
         
         for (let i = 0; i < cards.length; i++) {
             const locationRecord = {
+                place_id: cards[i].location.place_id,
                 name: cards[i].location.name,
                 latitude: cards[i].location.latitude,
                 longitude: cards[i].location.longitude,
