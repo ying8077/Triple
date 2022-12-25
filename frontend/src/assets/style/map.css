@@ -10,33 +10,45 @@
 }
 
 .map-container {
-    width: 1200px;
+    width: 1400px;
     height: 100vh;
-    margin: 40px 0 20px; 
+    margin: 40px 0 20px;
     box-sizing: border-box;
-    /* background-color: #FFFFFF; */
     border-radius: 10px;
     display: flex;
 }
 
-.map-gmap{
-    width: 70%;
+.map-gmap {
+    width: 60%;
     height: 80%;
     border-radius: 10px;
 }
 
-.map-marker{
+.map-marker {
     position: relative;
     top: 24px;
 }
 
-.map-route{
+.map-right {
     margin: 80px 0 0 80px;
-    display: flex;
-    flex-direction: column;
 }
 
-.map-route option{
+.map-modal-btn {
+    width: 90px;
+    margin: 0 0 12px 230px;
+    padding: 2px 12px;
+    background-color: #BDDCF2;
+    color: #FFFFFF;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.map-route {
+    position: relative;
+    display: flex;
+}
+
+.map-route option {
     width: 320px;
     padding: 0 12px;
     height: 32px;
@@ -46,16 +58,161 @@
     margin-bottom: 10px;
 }
 
-.map-route-add{
+.map-route-add {
     display: flex;
     align-items: center;
     color: #A0A0A0;
 }
 
-.map-route-add-icon{
+.map-route-add-icon {
     width: 30px;
     height: 30px;
     margin-right: 8px;
     background-image: url(../images/add.png);
     background-size: cover;
+}
+
+.map-route-totalTime {
+    position: relative;
+    top: -6px;
+}
+
+.map-route-totalTime,
+.map-route-time label {
+    color: #A2BDD6;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.map-route-time label {
+    padding-bottom: 4px;
+}
+
+.map-route-time:first-child label {
+    padding-bottom: 4px;
+}
+
+.map-route-timeList {
+    display: flex;
+    flex-direction: column;
+    margin: 12px 0 0 12px;
+}
+
+.map-route-time {
+    display: flex;
+    align-items: center;
+}
+
+.map-route-time-icon {
+    width: 40px;
+    height: 41px;
+    margin-right: 8px;
+    background-image: url(../images/route2.png);
+    background-size: cover;
+}
+
+.map-route-time:first-child .map-route-time-icon {
+    height: 52px;
+    background-image: url(../images/route.png);
+}
+
+.ant-modal-title {
+    font-size: 22px !important;
+}
+
+.map-modal-title {
+    display: flex;
+}
+
+.map-modal-title-name {
+    margin-right: 12px;
+    position: relative;
+    top: -2px
+}
+
+.note-calender {
+    display: flex;
+    align-items: center;
+}
+
+.note-calender-icon {
+    width: 26px;
+    height: 26px;
+    background-image: url(../images/calender.png);
+    background-size: cover;
+}
+
+.note-calender label {
+    color: #A0A0A0;
+    font-weight: 700;
+}
+
+.map-note-btnGroup{
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 4px;
+}
+
+.map-note-btn-add{
+    width: 24px;
+    height: 24px;
+    margin-right: 4px;
+    background-image: url(../images/add.png);
+    background-size: cover;
+}
+
+.map-note-btn-paste{
+    width: 24px;
+    height: 24px;
+    background-image: url(../images/paste.png);
+    background-size: cover;
+}
+
+.map-note-table {
+    overflow: hidden;
+    border-radius: 5px 5px 0 0;
+}
+
+.map-note-table input{
+    border: none;
+}
+
+.map-note-table input:focus,
+.map-note-table input:active{
+    outline: none;
+}
+
+.map-note-table table {
+    border-collapse: collapse;
+}
+
+.map-note-table th {
+    background-color: #7694A8;
+    color: #ffffff;
+    width: 25vw;
+    padding: 0 24px;
+    height: 48px;
+}
+
+.map-note-table td {
+    background-color: #ffffff;
+    width: 25vw;
+    height: 50px;
+    text-align: center;
+}
+
+.map-note-table tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.map-note-table tr:last-of-type {
+    border-bottom: 2px solid #7694A8;
+}
+
+.map-note-table tr:nth-of-type(even) td {
+    background-color: #f3f3f3;
+}
+
+.map-note-table tr:nth-of-type(even) input {
+    background-color: #f3f3f3;
 }
