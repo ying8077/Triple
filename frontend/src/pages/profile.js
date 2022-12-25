@@ -31,7 +31,7 @@ const Profile = () => {
                                 className="collection"
                                 onClick={() =>
                                     navigate(`collection?id=${collection.id}`,
-                                        { state: { data: JSON.parse(collection.details).list } }
+                                        { state: { data: JSON.parse(collection.details).list, name: collection.name } }
                                     )}>
                                 <img src={collection.image} alt="collectionImg" />
                                 <label>{collection.name}</label>
