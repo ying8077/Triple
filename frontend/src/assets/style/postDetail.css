@@ -1,0 +1,237 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
+
+.postDetail {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 16px;
+    /* color: rgb(37, 36, 36); */
+    min-height: 100vh;
+    background-color: #F3F5F8;
+    display: flex;
+    justify-content: center;
+}
+
+.postDetail button {
+    width: 20px;
+    height: 20px;
+    margin-right: 4px;
+    border: none;
+    background-size: cover;
+    background-color: transparent;
+}
+
+.postDetail-container {
+    width: 800px;
+    margin: 40px 0 20px; 
+    padding: 40px 90px;
+    box-sizing: border-box;
+    background-color: #FFFFFF;
+    border-radius: 10px;
+}
+
+.postDetail-header{
+    display: flex;
+    align-items: center;
+}
+
+.postDetail-header-user {
+    display: flex;
+    align-items: center;
+    margin-right: auto;
+}
+
+.postDetail-header-user img {
+    width: 50px;
+    height: 50px;
+    margin-right: 8px;
+    border-radius: 50%;
+}
+
+.postDetail-header-user label,
+.postDetail-date label {
+    color: #959595;
+}
+
+.postDetail-header-like,
+.postDetail-header-collection,
+.postDetail-card-title {
+    display: flex;
+    align-items: center;
+}
+
+.postDetail-header-like button{
+    width: 22px;
+    background-image: url(../images/unlike.png);
+}
+
+.postDetail-header-collection button{
+    height: 22px;
+    margin-left: 12px;
+    background-image: url(../images/collection.png);
+}
+
+.postDetail-title{
+    margin: 12px 0 0;
+    font-size: 24px;
+    font-weight: 500;
+}
+
+.postDetail-description{
+    margin: 32px 0 20px;
+}
+
+.postDetail-card{
+    margin-bottom: 40px;
+}
+
+.postDetail-card-title button{
+    width: 22px;
+    height: 24px;
+    background-image: url(../images/location-unselect.png);
+}
+
+.check-group{
+    height: 25px;
+}
+
+.check-group > input{ 
+    visibility: hidden; 
+    position: absolute; 
+} 
+
+.check-group > input + span{  
+    display: inline-block;
+    width: 26px;
+    height: 25px;
+    background-size: cover;
+    background-image: url(../images/location-unselect.png);
+    transition: all 0.1s;
+}
+
+.check-group > input:checked + span{ 
+    background-image: url(../images/location-select.png);
+}
+
+.postDetail-card-title label{
+    font-weight: 500;
+    font-size: 18px;
+}
+
+.postDetail-card-img{
+    display: flex;
+    justify-content: center;
+    margin: 16px 0;
+}
+
+.postDetail-card-img img{
+    border-radius: 5px;
+}
+
+.postDetail-card-recommend{
+    margin: 12px 0;
+}
+
+.postDetail-card-recommend label{
+    margin-right: 4px;
+}
+
+li.ant-rate-star{
+    margin-right: 2px !important;
+}
+
+.modal-header{
+    font-size: 18px;
+}
+
+.btn-close{
+    width: 0;
+    height: 0;
+    margin-right: 0 !important;
+}
+
+.modal-body{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.modal-body button{
+    display: flex;
+    align-items: center;
+    padding: 2px 8px;
+    border: none;
+    border-radius: 5px;
+    margin-bottom: 6px;
+    background-color: transparent;
+    transition: all 0.2s;
+}
+
+.modal-body button:hover{
+    background-color: #7694A8;
+    color: #FFFFFF;
+}
+
+.modal-body button::before{
+    content: '';
+    background-image: url(../images/collection-blue.png);
+    background-size: cover;
+    width: 15px;
+    height: 17px;
+    margin-right: 4px;
+    display: inline-block;
+}
+
+.modal-body button:hover::before{
+    background-image: url(../images/collection-white.png);
+}
+
+.modal-input-box {
+	position: relative;
+	width: 160px;
+	height: 40px;
+	margin-top: 10px;
+}
+
+.modal-input-box input {
+	width: 100%;
+	height: 100%;
+	border: none;
+	border-bottom: 1px solid #afaebd;
+}
+
+.modal-input-box input:focus,
+.modal-input-box input:active {
+    outline: none;
+}
+
+.modal-input-box span {
+	position: absolute;
+	bottom: 8px;
+	left: 0px;
+	color: #afaebd;
+    font-size: 14px;
+	pointer-events: none;
+	transition: all 0.3s ease;
+}
+
+.modal-input-line {
+	position: absolute;
+	bottom: 0px;
+	height: 2px;
+	width: 100%;
+	background-color: #7694A8;
+	transform: scaleX(0);
+	transition: all 0.3s ease;
+}
+
+.modal-input-box input:focus~span,
+.modal-input-box input:valid~span {
+	top: -10px;
+	font-size: 12px;
+	color: #7694A8;
+	font-style: oblique;
+}
+
+.modal-input-box input:focus~.modal-input-line,
+.modal-input-box input:valid~.modal-input-line {
+	transform: scaleX(1);
+}

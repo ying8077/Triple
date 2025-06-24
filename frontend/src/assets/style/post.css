@@ -1,0 +1,179 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
+
+.newPost {
+    font-family: 'Noto Sans TC', sans-serif;
+    min-height: 100vh;
+    background-color: #F3F5F8;
+    display: flex;
+    justify-content: center;
+}
+
+.newPost-container {
+    width: 1000px;
+    margin-top: 40px;
+    padding: 40px 80px;
+    box-sizing: border-box;
+    background-color: #FFFFFF;
+    border-radius: 10px;
+}
+
+.newPost-header {
+    display: flex;
+    align-items: center;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #D9D9D9;
+    position: relative;
+}
+
+.newPost-header h2 {
+    margin: 0 auto;
+    color: #353535;
+    font-size: 28px;
+    font-weight: 700;
+}
+
+.newPost-header button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 4px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #BDDCF2;
+    color: #FFFFFF;
+}
+
+.newPost-content {
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.newPost-content input,
+.newPost-content textarea {
+    padding: 0 8px;
+    border: none;
+}
+
+.newPost-content textarea {
+    overflow: hidden;
+    resize: none;
+    line-height: 27px;
+}
+
+.newPost-content input:focus,
+.newPost-content input:active,
+.newPost-content textarea:focus,
+.newPost-content textarea:active {
+    outline: none;
+}
+
+.newPost-content-title {
+    margin: 16px 0;
+    font-size: 24px;
+    font-weight: 400;
+}
+
+.newPost-content-description {
+    margin-bottom: 16px;
+    font-size: 18px;
+    font-weight: 300;
+}
+
+.newPost-card {
+    display: flex;
+    flex-direction: column;
+    padding: 12px 32px;
+    margin-bottom: 12px;
+    border: 2px solid #D9D9D9;
+    border-radius: 5px;
+}
+
+.newPost-card input {
+    width: 100%;
+    padding: 4px 8px;
+    margin-top: 4px;
+    border: 2px solid #D9D9D9;
+    border-radius: 5px;
+}
+
+.newPost-card-img {
+    position: relative;
+    margin: 12px 0;
+}
+
+.newPost-card-img input {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+.newPost-card-img label {
+    padding: 36px 0;
+    border: 2px dashed #D9D9D9;
+    border-radius: 5px;
+    height: auto;
+    color: #818181;
+    font-size: 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.newPost-card-img-icon {
+    width: 36px;
+    height: 36px;
+    background-size: cover;
+    background-image: url(../images/img-upload.png);
+}
+
+.newPost-card-img-btn {
+    padding: 2px 12px;
+    background-color: #BDDCF2;
+    border-radius: 5px;
+    color: #FFFFFF;
+}
+
+.newPost-btn-add {
+    border: none;
+    margin: 20px auto;
+    background-color: transparent;
+    width: 30px;
+    height: 30px;
+    background-image: url(../images/add.png);
+    background-size: cover;
+}
+
+.newPost-card-img img {
+    width: 50%;
+    height: 50%;
+    border-radius: 5px;
+    position: relative;
+}
+
+.newPost-card-img button {
+    border: none;
+    background-color: transparent;
+    width: 15px;
+    height: 15px;
+    background-image: url(../images/close.png);
+    background-size: cover;
+    position: absolute;
+    top: 5px;
+    right: 51%;
+}
+
+.newPost-card-btn-save{
+    font-size: 14px;;
+    width: 62px;
+    margin-left: auto;
+    padding: 4px 0;
+    border: none;
+    border-radius: 5px;
+    background-color: #A0A0A0;
+    color: #FFFFFF;
+}
