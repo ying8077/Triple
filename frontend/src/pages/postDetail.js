@@ -63,7 +63,26 @@ const Description = ({ str }) => {
 }
 
 function CollectionModal(props) {
+    const navigate = useNavigate();
     const [name, setName] = useState("");
+    const [collections, setCollections] = useState();
+    const [fetched, setFetched] = useState(false);
+
+    useEffect(() => {
+        if (!props.show || fetched) return;
+
+        const user = JSON.parse(localStorage.getItem('user'));
+        if (!user) {
+            toast.error("請先登入!", { position: "top-center" });
+            return navigate('/sign-in');
+        }
+
+        apiCollection(user.token).get(`/?user=${user.user_id}`)
+            .then(json => {
+                setCollections(json.data);
+                setFetched(true);
+            });
+    }, [props.show]);
 
     function nameChange(e) {
         setName(e.target.value);
@@ -79,7 +98,7 @@ function CollectionModal(props) {
     }
 
     function handleClick(collection_id = 0, collection_name = "") {
-        const {user_id, token} = JSON.parse(localStorage.getItem('user'));
+        const { user_id, token } = JSON.parse(localStorage.getItem('user'));
         let data;
         if (cardSelected.length === 0) {
             toast.warning("請先選擇收藏地點!", { position: "top-center" });
@@ -115,6 +134,7 @@ function CollectionModal(props) {
     }
 
     return (
+        collections &&
         <Modal
             {...props}
             size="sm"
@@ -127,7 +147,7 @@ function CollectionModal(props) {
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                {props.collections && props.collections.map(c => {
+                {collections && collections.map(c => {
                     return (
                         <button key={c.id} onClick={() => handleClick(c.id)}>{c.name}</button>
                     )
@@ -143,25 +163,14 @@ function CollectionModal(props) {
 }
 
 const PostDetail = () => {
-    const navigate = useNavigate();
     const [post, setPost] = useState();
-    const [collections, setCollections] = useState();
     const [modalShow, setModalShow] = useState(false);
     const setupStatus = useRef(false);
 
     useEffect(() => {
-        const user = JSON.parse(localStorage.getItem('user'));
-        if (!user) {
-            toast.error("請先登入!", { position: "top-center" });
-            return navigate('/sign-in');
-        }
         const post_id = new URLSearchParams(window.location.search).get('id');
         apiPost.get(`/detail?id=${post_id}`)
             .then(json => { setPost(json.data); console.log(json.data) })
-
-
-        apiCollection(user.token).get(`/?user=${user.user_id}`)
-            .then(json => { setCollections(json.data) })
     }, []);
 
     useEffect(() => {
@@ -201,7 +210,6 @@ const PostDetail = () => {
                         <CollectionModal
                             show={modalShow}
                             onHide={() => setModalShow(false)}
-                            collections={collections}
                         />
                         <label>加入行程</label>
                     </div>
