@@ -1,22 +1,24 @@
 import axios from "axios"
 
+const { REACT_APP_SERVER_URL } = process.env;
+
 export const apiPost = axios.create({
-    baseURL: 'http://localhost:8000/api/1.0/posts',
+    baseURL: `${REACT_APP_SERVER_URL}/posts`,
     headers: { "Content-Type": "application/json", }
 });
 
 export const apiPostImg = axios.create({
-    baseURL: 'http://localhost:8000/api/1.0/posts',
+    baseURL: `${REACT_APP_SERVER_URL}/posts`,
 });
 
 export const apiUser = axios.create({
-    baseURL: 'http://localhost:8000/api/1.0/users',
+    baseURL: `${REACT_APP_SERVER_URL}/users`,
     headers: { "Content-Type": "application/json", }
 });
 
 export const apiCollection = (token) => {
     return axios.create({
-        baseURL: 'http://localhost:8000/api/1.0/collections',
+        baseURL: `${REACT_APP_SERVER_URL}/collections`,
         headers: {
             "Content-Type": "application/json",
             'Authorization': `Bearer ${token}`

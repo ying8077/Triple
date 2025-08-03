@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from "react-toastify";
 import { Rate } from 'antd';
 import { apiPostImg, apiPost } from "../util/api";
+import { useGoogleMapsLoader } from '../hooks/useGoogleMapsScript';
 import "../assets/style/post.css";
 
 function handleTextAreaChange(event, textAreaHeight, setHeight) {
@@ -12,8 +13,6 @@ function handleTextAreaChange(event, textAreaHeight, setHeight) {
     if (trows !== textAreaHeight) {
         setHeight(trows);
     }
-    console.log(trows);
-    console.log(height);
 }
 
 const Img = ({ values, setValues }) => {
@@ -59,6 +58,7 @@ const Img = ({ values, setValues }) => {
 
 const NewCard = (props) => {
     const navigate = useNavigate();
+    const isLoaded = useGoogleMapsLoader();
     const [textareaheight, setTextareaheight] = useState(1);
     const [nameData, setName] = useState('');
     const [values, setValues] = useState({
@@ -93,6 +93,10 @@ const NewCard = (props) => {
             toast.error("請先登入!", { position: "top-center" });
             navigate('/sign-in');
         }
+    }, []);
+
+    useEffect(() => {
+        if (!isLoaded) return;
 
         autoCompleteRef.current = new window.google.maps.places.Autocomplete(
             inputRef.current,
@@ -114,7 +118,7 @@ const NewCard = (props) => {
             setName(name);
             setValues({ ...values, ["location"]: location_data });
         });
-    }, []);
+    }, [isLoaded]);
 
     return (
         <div className="newPost-card">

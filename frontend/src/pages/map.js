@@ -8,11 +8,13 @@ import dayjs from 'dayjs';
 import 'dayjs/locale/zh-tw';
 import "../assets/style/map.css"
 import blueIcon from "../assets/images/map.png"
+import { useGoogleMapsLoader } from '../hooks/useGoogleMapsScript';
 
 const Collection = () => {
     const navigate = useNavigate();
     const mapRef = useRef();
     const location = useLocation();
+    const isLoaded = useGoogleMapsLoader();
     const [pathList, setPathList] = useState([]);
     const [timeList, setTimeList] = useState([]);
     const [modalOpen, setModalOpen] = useState(false);
@@ -26,11 +28,14 @@ const Collection = () => {
             toast.error("請先登入!", { position: "top-center" });
             navigate('/sign-in');
         }
-        console.log(location.state.name);
-        setPathList([...pathList, <option></option>, <option></option>]);
-        initMap();
 
+        setPathList([...pathList, <option></option>, <option></option>]);
     }, [])
+
+     useEffect(() => {
+        if (!isLoaded) return;
+        initMap();
+    }, [isLoaded])
 
     function showPath() {
         const option = document.querySelectorAll('option');
@@ -157,9 +162,22 @@ const Collection = () => {
         let daysec = 24 * 60 * 60;
         let hoursec = 60 * 60;
         let minutesec = 60;
+
         let dd = Math.floor(seconds / daysec);
         let hh = Math.floor((seconds % daysec) / hoursec);
-        let mm = Math.floor((seconds % hoursec) / minutesec);
+        let remainingSec = seconds % hoursec;
+        let mm = Math.round(remainingSec / minutesec);
+
+        if (mm === 60) {
+            mm = 0;
+            hh += 1;
+        }
+
+        if (hh === 24) {
+            hh = 0;
+            dd += 1;
+        }
+
         if (dd > 0) {
             return `${dd}天${hh}小時${mm}分鐘`;
         } else if (hh > 0) {
