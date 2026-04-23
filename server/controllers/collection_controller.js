@@ -7,8 +7,6 @@ const imagePath = `${HOSTNAME}images/upload/`;
 const getCollection = async (req, res) => {
     const user_id = req.query.user;
     const list = await Collection.getCollection(user_id);
-    console.log("user_id", user_id)
-    console.log("list", list)
     for (let i = 0; i < list.length; i++) {
         const detail = JSON.parse(list[i].details);
         const location = detail.list[0].id;

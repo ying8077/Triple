@@ -77,13 +77,6 @@ function CollectionModal(props) {
             return navigate('/sign-in');
         }
 
-        // apiCollection(user.token).get(`?user=${user.user_id}`)
-        //     .then(json => {
-        //         console.log(json.data)
-        //         setCollections(json.data);
-        //         setFetched(true);
-        //     });
-
         apiCollection(user.token)
             .get('', {
                 params: {
@@ -91,7 +84,6 @@ function CollectionModal(props) {
                 }
             })
             .then(json => {
-                console.log(json.data);
                 setCollections(json.data);
                 setFetched(true);
             });
