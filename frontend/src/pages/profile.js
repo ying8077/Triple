@@ -15,7 +15,7 @@ const Profile = () => {
             return navigate('/sign-in');
         }
 
-        apiCollection(user.token).get(`/?user=${user.user_id}`)
+        apiCollection(user.token).get(`?user=${user.user_id}`)
             .then(json => setCollections(json.data))
     }, [])
 
